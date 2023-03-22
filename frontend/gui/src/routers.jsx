@@ -1,4 +1,5 @@
 import {Routes, Route} from "react-router-dom" 
+import ArticleDetail from "./containers/ArticleDetailView";
 import ArticleList from "./containers/ArticleListView";
 
 const BaseRouter = () => {
@@ -6,7 +7,7 @@ const BaseRouter = () => {
     <div>
         <Routes>
             <Route path="/" element={<ArticleList />} />
-            <Route path="/:id" element={<ArticleList />} />
+            <Route path="/:id" element={<ArticleDetail />} />
         </Routes>
     </div>
   );

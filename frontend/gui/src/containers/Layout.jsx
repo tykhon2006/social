@@ -1,6 +1,7 @@
 import { LaptopOutlined, NotificationOutlined, UserOutlined } from '@ant-design/icons';
 import { Breadcrumb, Layout, Menu, theme } from 'antd';
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 const { Header, Content, Footer, Sider } = Layout;
 const items1 = ['1', '2', '3'].map((key) => ({
   key,
@@ -41,9 +42,9 @@ const CustomLayout = props => {
             margin: '16px 0',
           }}
         >
-          <Breadcrumb.Item>Home</Breadcrumb.Item>
-          <Breadcrumb.Item>List</Breadcrumb.Item>
-          <Breadcrumb.Item>App</Breadcrumb.Item>
+          <Breadcrumb.Item><NavLink to="">Home</NavLink></Breadcrumb.Item>
+          <Breadcrumb.Item><NavLink to="">List</NavLink></Breadcrumb.Item>
+          <Breadcrumb.Item><NavLink to="">App</NavLink></Breadcrumb.Item>
         </Breadcrumb>
         <Layout
           style={{

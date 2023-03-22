@@ -1,5 +1,6 @@
 import { Avatar, List } from "antd";
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 const Article = (props) => (
   <List
@@ -30,12 +31,12 @@ const Article = (props) => (
       >
         <List.Item.Meta
           avatar={<Avatar src={item.avatar} />}
-          title={<a href={item.href}>{item.title}</a>}
+          title={<NavLink to={`/${item.id}`}>{item.title}</NavLink>}
           description={item.content}
         />
         {item.content}
         <br />
-        <div style={{ margin: "30px 10px 0 0" }} align="right" >{item.time_update.slice(0, 10)}</div>
+        <div style={{ margin: "30px 10px 0 0" }} align="right" >Updated: {item.time_update.slice(0, 10)}</div>
       </List.Item>
     )}
   />
