@@ -1,13 +1,7 @@
 import {
-    AutoComplete,
     Button,
-    Cascader,
-    Checkbox,
-    Col,
     Form,
     Input,
-    InputNumber,
-    Row,
     Select,
   } from 'antd';
   import { useState } from 'react';
@@ -90,18 +84,6 @@ import {
         >
           <Option value="86">+86</Option>
           <Option value="87">+87</Option>
-        </Select>
-      </Form.Item>
-    );
-    const suffixSelector = (
-      <Form.Item name="suffix" noStyle>
-        <Select
-          style={{
-            width: 70,
-          }}
-        >
-          <Option value="USD">$</Option>
-          <Option value="CNY">¥</Option>
         </Select>
       </Form.Item>
     );
@@ -201,19 +183,6 @@ import {
           <Input />
         </Form.Item>
   
-        <Form.Item
-          name="residence"
-          label="Habitual Residence"
-          rules={[
-            {
-              type: 'array',
-              required: true,
-              message: 'Please select your habitual residence!',
-            },
-          ]}
-        >
-          <Cascader options={residences} />
-        </Form.Item>
   
         <Form.Item
           name="phone"
@@ -233,43 +202,7 @@ import {
           />
         </Form.Item>
   
-        <Form.Item label="Captcha" extra="We must make sure that your are a human.">
-          <Row gutter={8}>
-            <Col span={12}>
-              <Form.Item
-                name="captcha"
-                noStyle
-                rules={[
-                  {
-                    required: true,
-                    message: 'Please input the captcha you got!',
-                  },
-                ]}
-              >
-                <Input />
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Button>Get captcha</Button>
-            </Col>
-          </Row>
-        </Form.Item>
   
-        <Form.Item
-          name="agreement"
-          valuePropName="checked"
-          rules={[
-            {
-              validator: (_, value) =>
-                value ? Promise.resolve() : Promise.reject(new Error('Should accept agreement')),
-            },
-          ]}
-          {...tailFormItemLayout}
-        >
-          <Checkbox>
-            I have read the <a href="">agreement</a>
-          </Checkbox>
-        </Form.Item>
         <Form.Item {...tailFormItemLayout}>
           <Button type="primary" htmlType="submit">
             Register
