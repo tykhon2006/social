@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import CustomFormComponent from "../components/Form";
 
-const ArticleList = (props) => {
+const ArticleList = () => {
   const [state, setState] = useState({
     articles: [],
   });
@@ -17,7 +17,7 @@ const ArticleList = (props) => {
   }, []);
   return (
     <div>
-      <CustomFormComponent></CustomFormComponent>
+      <CustomFormComponent requestType="post"></CustomFormComponent>
       <Article data={state.articles}></Article>;
     </div>
   );

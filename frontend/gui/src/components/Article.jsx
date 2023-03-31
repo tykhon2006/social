@@ -3,7 +3,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 const Article = (props) => (
-  <List
+  <List 
     itemLayout="vertical"
     size="large"
     pagination={{
@@ -19,7 +19,7 @@ const Article = (props) => (
       </div>
     }
     renderItem={(item) => (
-      <List.Item
+      <List.Item 
         key={item.title}
         extra={
           <img
