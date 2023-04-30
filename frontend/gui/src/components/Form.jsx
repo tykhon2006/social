@@ -40,11 +40,11 @@ const CustomFormComponent = (props) => {
             cat: state.catSelectedId,
             user: 1,
           })
-          .then((response) =>{
+          .then((response) => {
             props.setState({
-              articles: [response.data, ...props.articles]
-            })}
-          );
+              articles: [response.data, ...props.articles],
+            });
+          });
       case "put":
         return axios
           .put(`http://127.0.0.1:8000/api/v1/postlist/${articleId}/`, {
