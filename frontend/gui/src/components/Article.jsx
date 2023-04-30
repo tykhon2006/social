@@ -1,6 +1,7 @@
 import { Avatar, List } from "antd";
 import React from "react";
 import { NavLink } from "react-router-dom";
+import FormDelete from "./FormDelete";
 
 const Article = (props) => (
   <List 
@@ -36,6 +37,7 @@ const Article = (props) => (
         />
         {item.content}
         <br />
+        <FormDelete articleId={item.id}/>
         <div style={{ margin: "30px 10px 0 0" }} align="right" >Updated: {item.time_update.slice(0, 10)}</div>
       </List.Item>
     )}
