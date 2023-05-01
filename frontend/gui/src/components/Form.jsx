@@ -53,7 +53,16 @@ const CustomFormComponent = (props) => {
             cat: state.catSelectedId,
             user: 1,
           })
-          .then((response) => console.log(response.data));
+          .then((response) => {
+            const updatedArticle = {
+              id: response.data.id,
+              title: response.data.title,
+              content: response.data.content,
+              category: response.data.cat,
+              user: response.data.user,
+            };
+            props.setArticleState({ article: updatedArticle });
+          });
       default:
         console.log("Invalid request type");
     }

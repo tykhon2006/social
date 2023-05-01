@@ -25,10 +25,7 @@ function ArticleList() {
         setState={setState}
         articles={state.articles}
       />
-      <Article
-        data={state.articles}
-        setState={setState}
-      ></Article>
+      <Article data={state.articles} setState={setState}></Article>
     </div>
   );
 }

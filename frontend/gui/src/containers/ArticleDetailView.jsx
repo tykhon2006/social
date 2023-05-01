@@ -32,6 +32,8 @@ const ArticleDetail = () => {
       <h3 style={{ margin: "20px 0 0 0" }}>Update post</h3>
       <CustomFormComponent
         requestType="put"
+        setArticleState={setState}
+        article={state.article}
         articleId={articleId}
       ></CustomFormComponent>
     </div>
