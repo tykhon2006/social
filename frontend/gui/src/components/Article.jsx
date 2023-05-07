@@ -38,6 +38,7 @@ const Article = (props) => (
         {item.content}
         <br />
         <FormDelete
+        style={{marginBottom: "50px"}}
           articleId={item.id}
           setState={props.setState}
           articles={props.data}

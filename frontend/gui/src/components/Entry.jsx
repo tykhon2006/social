@@ -54,9 +54,9 @@ const Entry = () => {
 
       <Form.Item>
         <Button type="primary" htmlType="submit" className="login-form-button">
-          Log in
+          Sign in
         </Button>
-        Or <a href="">register now!</a>
+        Or <a  href="/login">register now!</a>
       </Form.Item>
     </Form>
   );

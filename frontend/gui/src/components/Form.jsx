@@ -4,25 +4,42 @@ import { useState, useEffect } from "react";
 
 const CustomFormComponent = (props) => {
   const [showFields, setShowFields] = useState(false);
+
   const [state, setState] = useState({
     cats: [],
     catSelectedId: 1,
+    titleValue: "",
+    contentValue: "",
   });
+
+  const titleValueChange = (event) =>
+    setState({
+      ...state,
+      titleValue: event.target.value,
+    });
+
+  const contentValueChange = (event) =>
+    setState({
+      ...state,
+      contentValue: event.target.value,
+    });
+
   useEffect(() => {
     axios.get("http://127.0.0.1:8000/api/v1/cats/").then((response) => {
       setState({
+        ...state,
         cats: response.data,
         catSelectedId: response.data[0].id,
       });
     });
   }, []);
 
-  const handleChange = (value) => {
+  function handleChange(value) {
     setState({
       ...state,
       catSelectedId: value,
     });
-  };
+  }
 
   const handleCheckboxChange = (e) => {
     setShowFields(e.target.checked);
@@ -31,6 +48,7 @@ const CustomFormComponent = (props) => {
   const handleFormSubmit = (values, requestType, articleId) => {
     const title = values.target.elements.title.value;
     const content = values.target.elements.content.value;
+
     switch (requestType) {
       case "post":
         return axios
@@ -44,7 +62,13 @@ const CustomFormComponent = (props) => {
             props.setState({
               articles: [response.data, ...props.articles],
             });
+            setState({
+              ...state,
+              titleValue: "",
+              contentValue: "",
+            });
           });
+
       case "put":
         return axios
           .put(`http://127.0.0.1:8000/api/v1/postlist/${articleId}/`, {
@@ -55,12 +79,16 @@ const CustomFormComponent = (props) => {
           })
           .then((response) => {
             const updatedArticle = {
-              id: response.data.id,
               title: response.data.title,
               content: response.data.content,
-              category: response.data.cat,
-              user: response.data.user,
+              cat: response.data.cat,
+              time_create: response.data.time_create,
             };
+            setState({
+              ...state,
+              titleValue: "",
+              contentValue: "",
+            });
             props.setArticleState({ article: updatedArticle });
           });
       default:
@@ -82,13 +110,21 @@ const CustomFormComponent = (props) => {
       {showFields && (
         <fieldset id="post">
           <Form.Item label="Post title">
-            <Input placeholder="Enter title here" name="title" required />
+            <Input
+              placeholder="Enter title here"
+              onChange={titleValueChange}
+              value={state.titleValue}
+              name="title"
+              required
+            />
           </Form.Item>
 
           <Form.Item label="Content">
             <Input.TextArea
               placeholder="Enter some content here"
               name="content"
+              onChange={contentValueChange}
+              value={state.contentValue}
             />
           </Form.Item>
 

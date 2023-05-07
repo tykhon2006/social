@@ -5,11 +5,10 @@ const FormDelete = (props) => {
     return axios
       .delete(`http://127.0.0.1:8000/api/v1/delete/${articleId}/`)
       .then(() => {
-        const updatedArticles = props.articles.filter(
-          (article) => article.id !== articleId
-        );
         props.setState({
-          articles: updatedArticles,
+          articles: props.articles.filter(
+            (article) => article.id !== articleId
+          ),
         });
       });
   };

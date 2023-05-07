@@ -1,6 +1,4 @@
-import { Button, Form, Input, Select } from "antd";
-import { useState } from "react";
-const { Option } = Select;
+import { Button, Form, Input } from "antd";
 const formItemLayout = {
   labelCol: {
     xs: {
@@ -31,6 +29,7 @@ const tailFormItemLayout = {
     },
   },
 };
+
 const Registration = () => {
   const [form] = Form.useForm();
   const onFinish = (values) => {
@@ -136,7 +135,6 @@ const Registration = () => {
       >
         <Input.Password />
       </Form.Item>
-
       <Form.Item {...tailFormItemLayout}>
         <Button type="primary" htmlType="submit">
           Register
