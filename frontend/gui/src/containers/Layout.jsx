@@ -20,45 +20,57 @@ import React, { useState } from "react";
 
 import { NavLink } from "react-router-dom";
 
-const desc = ["terrible", "bad", "normal", "good", "wonderful"];
-
-const { Header, Content, Footer, Sider } = Layout;
-
-const items1 = [
-  { href: "/", key: 0, label: "Home" },
-  { href: "/login", key: 1, label: "Login" },
-  { href: "/signUp", key: 2, label: "Sign up" },
-].map((item) => ({
-  key: item.href,
-  label: (
-    <NavLink key={item.key} to={item.href}>
-      {item.label}
-    </NavLink>
-  ),
-}));
-
-const items2 = [UserOutlined, LaptopOutlined, NotificationOutlined].map(
-  (icon, index) => {
-    const key = String(index + 1);
-    const labels = ["User", "Store", "Blog"];
-    const labelText = labels[index];
-    return {
-      key: `sub ${key}`,
-      icon: React.createElement(icon),
-      label: labelText,
-      children: new Array(4).fill(null).map((_, j) => {
-        const subKey = `${index + 1}-${j + 1}`;
-        return {
-          key: subKey,
-          label: `option ${subKey}`,
-        };
-      }),
-    };
-  }
-);
-
 const CustomLayout = (props) => {
   const [value, setValue] = useState(3);
+
+  const desc = ["terrible", "bad", "normal", "good", "wonderful"];
+
+  const { Header, Content, Footer, Sider } = Layout;
+
+  const items1 = [
+    {
+      href: "/",
+      key: 0,
+      label: "Home",
+    },
+    {
+      href: "/signUp",
+      key: 1,
+      label: "Sign up",
+    },
+    {
+      href: "/login",
+      key: 2,
+      label: "Login",
+    },
+  ].map((item) => ({
+    key: item.href,
+    label: (
+      <NavLink key={item.key} to={item.href}>
+        {item.label}
+      </NavLink>
+    ),
+  }));
+
+  const items2 = [UserOutlined, LaptopOutlined, NotificationOutlined].map(
+    (icon, index) => {
+      const key = String(index + 1);
+      const labels = ["User", "Store", "Blog"];
+      const labelText = labels[index];
+      return {
+        key: `sub ${key}`,
+        icon: React.createElement(icon),
+        label: labelText,
+        children: new Array(4).fill(null).map((_, j) => {
+          const subKey = `${index + 1}-${j + 1}`;
+          return {
+            key: subKey,
+            label: `option ${subKey}`,
+          };
+        }),
+      };
+    }
+  );
 
   const content = (
     <span>
@@ -73,22 +85,24 @@ const CustomLayout = (props) => {
     <Layout>
       <Header
         className="header"
-        style={{
-          display: "flex",
-          alignItems: "center",
-        }}
+        style={{ display: "flex", alignItems: "center" }}
       >
-        <NavLink
-          to="/"
-          style={{ margin: "0 20px", display: "flex", alignItems: "center" }}
-        >
-          <CodepenCircleOutlined
-            style={{
-              fontSize: "32px",
-              color: "#08c",
-            }}
-          />
-        </NavLink>
+        <Breadcrumb>
+          <Breadcrumb.Item>
+            <NavLink
+              to="/"
+              style={{
+                margin: "0 20px",
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              <CodepenCircleOutlined
+                style={{ fontSize: "32px", color: "#08c" }}
+              />
+            </NavLink>
+          </Breadcrumb.Item>
+        </Breadcrumb>
         <Menu
           theme="dark"
           mode="horizontal"
@@ -107,14 +121,17 @@ const CustomLayout = (props) => {
           }}
         >
           <Breadcrumb.Item>
-            <NavLink to="/">Profile</NavLink>
+            <NavLink to="/">Home</NavLink>
           </Breadcrumb.Item>
-          <Breadcrumb.Item>
-            <NavLink to="/">Chat</NavLink>
-          </Breadcrumb.Item>
-          <Breadcrumb.Item>
-            <NavLink to="/">Photo</NavLink>
-          </Breadcrumb.Item>
+          {props.isAuthenticated ? (
+            <Breadcrumb.Item>
+              <NavLink to="/">Logout</NavLink>
+            </Breadcrumb.Item>
+          ) : (
+            <Breadcrumb.Item>
+              <NavLink to="/login">Login</NavLink>
+            </Breadcrumb.Item>
+          )}
         </Breadcrumb>
         <Layout
           style={{
@@ -159,7 +176,7 @@ const CustomLayout = (props) => {
         <Popover
           content={content}
           title="Thank you for your help!"
-          trigger="hover"
+          trigger="click"
         >
           <Button>Rate our site</Button>
         </Popover>

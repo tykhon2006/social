@@ -3,15 +3,22 @@ import 'antd/dist/reset.css';
 import CustomLayout from './containers/Layout.jsx';
 import BaseRouter from './routers';
 import { BrowserRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-function App() {
+function App(props) {
   return (
     <BrowserRouter>
-      <CustomLayout>
+      <CustomLayout {...props}>
         <BaseRouter />
       </CustomLayout>
     </BrowserRouter>
   )
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    isAuthenticated: state.token,
+  }
+}
+
+export default connect(mapStateToProps)(App);

@@ -25,15 +25,20 @@ const CustomFormComponent = (props) => {
     });
 
   useEffect(() => {
-    axios.get("http://127.0.0.1:8000/api/v1/cats/").then((response) => {
+    axios.get("http://127.0.0.1:8000/api/v1/cats/", {
+      headers: {
+        Authorization: "Token " + "1eda7d5d3daedb1d1e9fe0736b9b9f3d30f0298b",
+      },
+    })
+    .then((response) => {
       setState({
         ...state,
         cats: response.data,
         catSelectedId: response.data[0].id,
       });
     });
-  }, []);
-
+  }, [])
+  
   function handleChange(value) {
     setState({
       ...state,
@@ -48,16 +53,25 @@ const CustomFormComponent = (props) => {
   const handleFormSubmit = (values, requestType, articleId) => {
     const title = values.target.elements.title.value;
     const content = values.target.elements.content.value;
+    const userToken = {
+      headers: {
+        Authorization: "Token " + "1eda7d5d3daedb1d1e9fe0736b9b9f3d30f0298b",
+      },
+    };
 
     switch (requestType) {
       case "post":
         return axios
-          .post("http://127.0.0.1:8000/api/v1/postlist/", {
-            title: title,
-            content: content,
-            cat: state.catSelectedId,
-            user: 1,
-          })
+          .post(
+            "http://127.0.0.1:8000/api/v1/postlist/",
+            {
+              title: title,
+              content: content,
+              cat: state.catSelectedId,
+              user: 1,
+            },
+            userToken
+          )
           .then((response) => {
             props.setState({
               articles: [response.data, ...props.articles],
@@ -71,12 +85,16 @@ const CustomFormComponent = (props) => {
 
       case "put":
         return axios
-          .put(`http://127.0.0.1:8000/api/v1/postlist/${articleId}/`, {
-            title: title,
-            content: content,
-            cat: state.catSelectedId,
-            user: 1,
-          })
+          .put(
+            `http://127.0.0.1:8000/api/v1/postlist/${articleId}/`,
+            {
+              title: title,
+              content: content,
+              cat: state.catSelectedId,
+              user: 1,
+            },
+            userToken
+          )
           .then((response) => {
             const updatedArticle = {
               title: response.data.title,

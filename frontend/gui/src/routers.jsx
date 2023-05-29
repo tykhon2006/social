@@ -1,8 +1,8 @@
 import { Routes, Route } from "react-router-dom";
 import ArticleDetail from "./containers/ArticleDetailView";
 import ArticleList from "./containers/ArticleListView";
-import Registration from "./components/Registration";
-import Entry from "./components/Entry";
+import Entry from "./containers/Entry";
+import Registration from "./containers/Registration";
 
 const BaseRouter = () => {
   return (
@@ -10,8 +10,8 @@ const BaseRouter = () => {
       <Routes>
         <Route path="/" element={<ArticleList />} />
         <Route path="/:id" element={<ArticleDetail />} />
-        <Route path="/login" element={<Registration />} />
-        <Route path="/signUp" element={<Entry />} />
+        <Route path="/login" element={<Entry />} />
+        <Route path="/signUp" element={<Registration />} />
       </Routes>
     </div>
   );

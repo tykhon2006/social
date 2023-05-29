@@ -1,34 +1,4 @@
 import { Button, Form, Input } from "antd";
-const formItemLayout = {
-  labelCol: {
-    xs: {
-      span: 24,
-    },
-    sm: {
-      span: 8,
-    },
-  },
-  wrapperCol: {
-    xs: {
-      span: 24,
-    },
-    sm: {
-      span: 16,
-    },
-  },
-};
-const tailFormItemLayout = {
-  wrapperCol: {
-    xs: {
-      span: 24,
-      offset: 0,
-    },
-    sm: {
-      span: 16,
-      offset: 8,
-    },
-  },
-};
 
 const Registration = () => {
   const [form] = Form.useForm();
@@ -38,14 +8,9 @@ const Registration = () => {
 
   return (
     <Form
-      {...formItemLayout}
       form={form}
       name="register"
       onFinish={onFinish}
-      initialValues={{
-        residence: ["zhejiang", "hangzhou", "xihu"],
-        prefix: "86",
-      }}
       style={{
         maxWidth: 600,
       }}
@@ -80,22 +45,6 @@ const Registration = () => {
         ]}
       >
         <Input />
-      </Form.Item>
-      <Form.Item
-        name="phone"
-        label="Phone Number"
-        rules={[
-          {
-            required: true,
-            message: "Please input your phone number!",
-          },
-        ]}
-      >
-        <Input
-          style={{
-            width: "100%",
-          }}
-        />
       </Form.Item>
       <Form.Item
         name="password"
@@ -135,7 +84,7 @@ const Registration = () => {
       >
         <Input.Password />
       </Form.Item>
-      <Form.Item {...tailFormItemLayout}>
+      <Form.Item >
         <Button type="primary" htmlType="submit">
           Register
         </Button>
