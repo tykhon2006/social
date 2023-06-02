@@ -1,11 +1,13 @@
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Checkbox, Form, Input, Spin } from "antd";
 import { connect } from "react-redux";
+import { NavLink } from "react-router-dom";
+import { authLogin } from "../store/actions/auth";
 
 // 1eda7d5d3daedb1d1e9fe0736b9b9f3d30f0298b
 const Entry = (props) => {
   const onFinish = (values) => {
-    console.log("Received values of form: ", values);
+    console.log(values.username, values.password)    
   };
   let errorMessage = null;
   if (props.error) {
@@ -67,19 +69,25 @@ const Entry = (props) => {
               className="login-form-button"
             >
               Sign in
-            </Button>
-            Or <a href="/login">register now!</a>
+            </Button> Or <NavLink to="/login">register now!</NavLink>
           </Form.Item>
         </Form>
       )}
     </div>
   );
 };
+
 const mapStateToProps = (state) => {
   return {
     loading: state.loading,
-    error: { message: "error" },
+    error: state.error,
   };
 };
 
-export default connect(mapStateToProps)(Entry);
+const mapDispatchToProps = dispatch =>{
+  return{
+    onAuth: (username, password)=> dispatch(authLogin(username, password))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Entry);
