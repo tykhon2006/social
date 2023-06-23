@@ -1,9 +1,11 @@
 import { Button, Form, Input } from "antd";
+import { authSignUp } from "../store/actions/auth";
+import { connect } from "react-redux";
 
-const Registration = () => {
+const Registration = (props) => {
   const [form] = Form.useForm();
   const onFinish = (values) => {
-    console.log("Received values of form: ", values);
+    props.onAuth(values.username, values.email, values.password)
   };
 
   return (
@@ -17,7 +19,7 @@ const Registration = () => {
       scrollToFirstError
     >
       <Form.Item
-        name="nickname"
+        name="username"
         label="Nickname"
         tooltip="What do you want others to call you?"
         rules={[
@@ -85,11 +87,24 @@ const Registration = () => {
         <Input.Password />
       </Form.Item>
       <Form.Item >
-        <Button type="primary" htmlType="submit">
+        <Button type="primary" htmlType="submit" >
           Register
         </Button>
       </Form.Item>
     </Form>
   );
 };
-export default Registration;
+const mapStateToProps = (state) => {
+  return {
+    loading: state.loading,
+    error: state.error,
+  };
+};
+
+const mapDispatchToProps = dispatch =>{
+  return{
+    onAuth: (username, email, password)=> dispatch(authSignUp(username, email, password))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Registration);

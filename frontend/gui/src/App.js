@@ -8,9 +8,9 @@ import * as actions from "./store/actions/auth"
 import { useEffect } from 'react';
 
 function App(props) {
-  // useEffect(()=>{
-  //   props.onTryAutoSignUp()
-  // }, [])
+  useEffect(()=>{
+    props.onTryAutoSignUp()
+  }, [])
   return (
     <BrowserRouter>
       <CustomLayout {...props}>

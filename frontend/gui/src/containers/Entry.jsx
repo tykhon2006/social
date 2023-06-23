@@ -7,7 +7,7 @@ import { authLogin } from "../store/actions/auth";
 // 1eda7d5d3daedb1d1e9fe0736b9b9f3d30f0298b
 const Entry = (props) => {
   const onFinish = (values) => {
-    console.log(values.username, values.password)    
+    props.onAuth(values.username, values.password)
   };
   let errorMessage = null;
   if (props.error) {

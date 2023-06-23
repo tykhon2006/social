@@ -20,6 +20,9 @@ import React, { useState } from "react";
 
 import { NavLink } from "react-router-dom";
 
+import {authLogout} from "../store/actions/auth"
+import { connect } from "react-redux";
+
 const CustomLayout = (props) => {
   const [value, setValue] = useState(3);
 
@@ -124,8 +127,10 @@ const CustomLayout = (props) => {
             <NavLink to="/">Home</NavLink>
           </Breadcrumb.Item>
           {props.isAuthenticated ? (
-            <Breadcrumb.Item>
-              <NavLink to="/">Logout</NavLink>
+            <Breadcrumb.Item style={{
+              cursor: "pointer"
+            }} onClick={props.logout}>
+              Logout
             </Breadcrumb.Item>
           ) : (
             <Breadcrumb.Item>
@@ -186,4 +191,10 @@ const CustomLayout = (props) => {
     </Layout>
   );
 };
-export default CustomLayout;
+
+const mapDispatchToProps = (dispatch)=>{
+  return{
+    logout: ()=> dispatch(authLogout())
+  }
+}
+export default connect(null, mapDispatchToProps)(CustomLayout);
