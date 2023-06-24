@@ -4,12 +4,21 @@ const { Meta } = Card;
 const Profile = () => (
   <Card
     style={{
-      width: 300,
+      width: 750,
+      display: "flex",
+      flexDirection: "column",
+      padding: "10px",
+      margin: "auto"
     }}
     cover={
       <img
         alt="example"
         src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+        style={{
+            width: 300,
+            margin: "auto",
+            borderRadius: "10px"
+          }}
       />
     }
     actions={[
@@ -20,8 +29,7 @@ const Profile = () => (
   >
     <Meta
       avatar={<Avatar src="https://xsgames.co/randomusers/avatar.php?g=pixel" />}
-      title="Card title"
-      description="This is the description"
+      title="Profile"
     />
   </Card>
 );
