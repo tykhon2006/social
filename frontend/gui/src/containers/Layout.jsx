@@ -85,7 +85,6 @@ const CustomLayout = (props) => {
     token: { colorBgContainer },
   } = theme.useToken();
   let token = localStorage.getItem("token")
-  console.log(localStorage.getItem("x"))
   console.log(token)
   console.log(props.isAuthenticated)
   return (
