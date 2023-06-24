@@ -27,7 +27,7 @@ export const authLogin = (username, password) => {
             localStorage.setItem("token", token);
             localStorage.setItem("expirationDate", expirationDate);
             dispatch(authSuccess(token));
-            dispatch(checkAuthTimeout(3600))
+            dispatch(checkAuthTimeout(36000))
         })
             .catch(error => {
                 dispatch(authFail(error));
@@ -38,7 +38,7 @@ export const authLogin = (username, password) => {
 export const authSignUp = (username, email, password) => {
     return dispatch => {
         dispatch(authStart());
-        axios.post("http://127.0.0.1:8000/auth/token/login/", {
+        axios.post("http://127.0.0.1:8000/api/v1/auth/users/", {
             username, email, password
         }).then((response) => {
             const token = response.data.auth_token;
@@ -46,7 +46,7 @@ export const authSignUp = (username, email, password) => {
             localStorage.setItem("token", token);
             localStorage.setItem("expirationDate", expirationDate);
             dispatch(authSuccess(token));
-            dispatch(checkAuthTimeout(3600))
+            dispatch(checkAuthTimeout(36000))
         })
             .catch(error => {
                 dispatch(authFail(error));

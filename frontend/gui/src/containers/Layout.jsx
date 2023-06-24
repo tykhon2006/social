@@ -20,7 +20,7 @@ import React, { useState } from "react";
 
 import { NavLink } from "react-router-dom";
 
-import {authLogout} from "../store/actions/auth"
+import { authLogout } from "../store/actions/auth";
 import { connect } from "react-redux";
 
 const CustomLayout = (props) => {
@@ -84,6 +84,10 @@ const CustomLayout = (props) => {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
+  let token = localStorage.getItem("token")
+  console.log(localStorage.getItem("x"))
+  console.log(token)
+  console.log(props.isAuthenticated)
   return (
     <Layout>
       <Header
@@ -127,9 +131,12 @@ const CustomLayout = (props) => {
             <NavLink to="/">Home</NavLink>
           </Breadcrumb.Item>
           {props.isAuthenticated ? (
-            <Breadcrumb.Item style={{
-              cursor: "pointer"
-            }} onClick={props.logout}>
+            <Breadcrumb.Item
+              style={{
+                cursor: "pointer",
+              }}
+              onClick={props.logout}
+            >
               Logout
             </Breadcrumb.Item>
           ) : (
@@ -192,9 +199,9 @@ const CustomLayout = (props) => {
   );
 };
 
-const mapDispatchToProps = (dispatch)=>{
-  return{
-    logout: ()=> dispatch(authLogout())
-  }
-}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    logout: () => dispatch(authLogout()),
+  };
+};
 export default connect(null, mapDispatchToProps)(CustomLayout);

@@ -1,11 +1,14 @@
 import { Button, Form, Input } from "antd";
 import { authSignUp } from "../store/actions/auth";
 import { connect } from "react-redux";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const Registration = (props) => {
+  const navigate = useNavigate()
   const [form] = Form.useForm();
   const onFinish = (values) => {
     props.onAuth(values.username, values.email, values.password)
+    navigate("/")
   };
 
   return (
