@@ -37,14 +37,9 @@ const CustomLayout = (props) => {
       label: "Home",
     },
     {
-      href: "/signUp",
-      key: 1,
-      label: "Sign up",
-    },
-    {
-      href: "/login",
+      href: "/profile",
       key: 2,
-      label: "Login",
+      label: "Profile",
     },
   ].map((item) => ({
     key: item.href,
@@ -127,7 +122,7 @@ const CustomLayout = (props) => {
           }}
         >
           <Breadcrumb.Item>
-            <NavLink to="/">Home</NavLink>
+            <NavLink to="/signUp">Sign up</NavLink>
           </Breadcrumb.Item>
           {props.isAuthenticated ? (
             <Breadcrumb.Item
