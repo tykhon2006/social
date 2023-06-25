@@ -1,3 +1,4 @@
+import { BorderRightOutlined } from "@ant-design/icons";
 import { Button, Form, Input, Checkbox, Select } from "antd";
 import axios from "axios";
 import { useState, useEffect } from "react";
@@ -25,20 +26,21 @@ const CustomFormComponent = (props) => {
     });
 
   useEffect(() => {
-    axios.get("http://127.0.0.1:8000/api/v1/cats/", {
-      headers: {
-        Authorization: "Token " + "1eda7d5d3daedb1d1e9fe0736b9b9f3d30f0298b",
-      },
-    })
-    .then((response) => {
-      setState({
-        ...state,
-        cats: response.data,
-        catSelectedId: response.data[0].id,
+    axios
+      .get("http://127.0.0.1:8000/api/v1/cats/", {
+        headers: {
+          Authorization: "Token " + "1eda7d5d3daedb1d1e9fe0736b9b9f3d30f0298b",
+        },
+      })
+      .then((response) => {
+        setState({
+          ...state,
+          cats: response.data,
+          catSelectedId: response.data[0].id,
+        });
       });
-    });
-  }, [])
-  
+  }, []);
+
   function handleChange(value) {
     setState({
       ...state,
@@ -119,6 +121,14 @@ const CustomFormComponent = (props) => {
       onSubmitCapture={(event) =>
         handleFormSubmit(event, props.requestType, props.articleId)
       }
+      style={{
+        backgroundColor: "#F9F9F9",
+        borderRadius: "10px",
+        borderBottom: "1.5px solid rgba(56, 111, 164, 0.6)",
+        borderRight: "1.5px solid rgba(56, 111, 164, 0.6)",
+        padding: "5px",
+        boxShadow: "0 8px 9px rgba(0, 0, 0, 0.1)",
+      }}
     >
       <Form.Item>
         <Checkbox onChange={handleCheckboxChange}>
