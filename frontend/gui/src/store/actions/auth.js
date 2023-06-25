@@ -26,7 +26,7 @@ export const authLogin = (username, password) => {
             username, password
         }).then((response) => {
             const token = response.data.auth_token;
-            const expirationDate = new Date();
+            const expirationDate = new Date(new Date().getTime() + 86400 * 1000);
             localStorage.setItem("token", token);
             localStorage.setItem("expirationDate", expirationDate);
             dispatch(authSuccess(token));
@@ -45,7 +45,7 @@ export const authSignUp = (username, email, password) => {
             username, email, password
         }).then((response) => {
             const token = response.data.auth_token;
-            const expirationDate = new Date();
+            const expirationDate = new Date(new Date().getTime() + 86400 * 1000);
             localStorage.setItem("token", token);
             localStorage.setItem("expirationDate", expirationDate);
             dispatch(authSuccess(token));
@@ -64,7 +64,6 @@ export const authCheckState = () => {
             dispatch(authLogout())
         } else {
             const expirationDate = new Date(localStorage.getItem("expirationDate"))
-            expirationDate.setDate(expirationDate.getDate() + 1)
             if (expirationDate <= new Date()) {
                 dispatch(authLogout())
             } else {
