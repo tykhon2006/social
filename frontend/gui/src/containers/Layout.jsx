@@ -24,6 +24,15 @@ import { authLogout } from "../store/actions/auth";
 import { connect } from "react-redux";
 
 const CustomLayout = (props) => {
+  const updateActiveItem = () => {
+    const menuComponent = document.getElementById("Menu");
+    const childElements = menuComponent.childNodes;
+    for (let i = 0; i < childElements.length; i++) {
+      if (childElements[i].classList.contains("ant-menu-item-selected")) {
+        childElements[i].classList.remove("ant-menu-item-selected");
+      }
+    }
+  };
   const [value, setValue] = useState(3);
 
   const desc = ["terrible", "bad", "normal", "good", "wonderful"];
@@ -38,7 +47,7 @@ const CustomLayout = (props) => {
     },
     {
       href: "/profile",
-      key: 2,
+      key: 1,
       label: "Profile",
     },
   ].map((item) => ({
@@ -55,10 +64,16 @@ const CustomLayout = (props) => {
       const key = String(index + 1);
       const labels = ["User", "Store", "Blog"];
       const labelText = labels[index];
+      const labelStyles = [
+        { borderBottom: "1px solid #ffb703" },
+        { borderBottom: "1px solid #219ebc" },
+        { borderBottom: "1px solid #023047" },
+      ];
+
       return {
         key: `sub ${key}`,
         icon: React.createElement(icon),
-        label: labelText,
+        label: <div style={labelStyles[index]}>{labelText}</div>,
         children: new Array(4).fill(null).map((_, j) => {
           const subKey = `${index + 1}-${j + 1}`;
           return {
@@ -79,9 +94,6 @@ const CustomLayout = (props) => {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
-  let token = localStorage.getItem("token")
-  console.log(token)
-  console.log(props.isAuthenticated)
   return (
     <Layout>
       <Header
@@ -99,12 +111,14 @@ const CustomLayout = (props) => {
               }}
             >
               <CodepenCircleOutlined
+                onClick={updateActiveItem}
                 style={{ fontSize: "32px", color: "#08c" }}
               />
             </NavLink>
           </Breadcrumb.Item>
         </Breadcrumb>
         <Menu
+          id={"Menu"}
           theme="dark"
           mode="horizontal"
           defaultSelectedKeys={["1"]}
@@ -114,28 +128,47 @@ const CustomLayout = (props) => {
       <Content
         style={{
           padding: "0 50px",
+          backgroundColor: "#d8e1e9"
         }}
       >
         <Breadcrumb
           style={{
+            display: "flex",
+            justifyContent: "flex-end",
             margin: "16px 0",
           }}
         >
           <Breadcrumb.Item>
-            <NavLink to="/signUp">Sign up</NavLink>
+            <NavLink
+              to="/signUp"
+              style={{
+                borderBottom: "2px solid #0096c7",
+              }}
+            >
+              Sign up
+            </NavLink>
           </Breadcrumb.Item>
           {props.isAuthenticated ? (
-            <Breadcrumb.Item
-              style={{
-                cursor: "pointer",
-              }}
-              onClick={props.logout}
-            >
-              Logout
+            <Breadcrumb.Item>
+              <NavLink
+                style={{
+                  borderBottom: "2px solid #e63946",
+                }}
+                onClick={props.logout}
+              >
+                Logout
+              </NavLink>
             </Breadcrumb.Item>
           ) : (
             <Breadcrumb.Item>
-              <NavLink to="/login">Login</NavLink>
+              <NavLink
+                to="/login"
+                style={{
+                  borderBottom: "2px solid #8ac926",
+                }}
+              >
+                Login
+              </NavLink>
             </Breadcrumb.Item>
           )}
         </Breadcrumb>
