@@ -122,12 +122,12 @@ const CustomFormComponent = (props) => {
         handleFormSubmit(event, props.requestType, props.articleId)
       }
       style={{
-        backgroundColor: "#F9F9F9",
+        backgroundColor: "rgba(249,249,249, 0.7)",
         borderRadius: "10px",
         borderBottom: "1.5px solid rgba(56, 111, 164, 0.6)",
         borderRight: "1.5px solid rgba(56, 111, 164, 0.6)",
         padding: "5px",
-        boxShadow: "0 8px 9px rgba(0, 0, 0, 0.1)",
+        boxShadow: "0 5px 6px rgba(0, 0, 0, 0.1)",
       }}
     >
       <Form.Item>

@@ -128,7 +128,8 @@ const CustomLayout = (props) => {
       <Content
         style={{
           padding: "0 50px",
-          backgroundColor: "#d8e1e9"
+          backgroundColor: "#d8e1e9",
+          minHeight: "600px"
         }}
       >
         <Breadcrumb
@@ -219,7 +220,7 @@ const CustomLayout = (props) => {
         >
           <Button>Rate our site</Button>
         </Popover>
-        Ant Design ©2023 Created by Ant UED
+        Copyright denied
         <div id="#" style={{ marginRight: "5%" }}></div>
       </Footer>
     </Layout>

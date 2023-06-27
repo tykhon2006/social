@@ -4,18 +4,17 @@ const { Meta } = Card;
 const Profile = () => (
   <Card
     style={{
-      width: 750,
-      display: "flex",
+      width: "50%",
       flexDirection: "column",
       padding: "10px",
-      margin: "auto"
+      flexDirection: "flex-start"
     }}
     cover={
       <img
         alt="example"
         src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
         style={{
-            width: 300,
+            width: "50%",
             margin: "auto",
             borderRadius: "10px"
           }}
